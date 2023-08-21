@@ -10,13 +10,16 @@ const Landing = () => {
     console.log('useEffect');
     getAvatar()
   }, []);
+
     const getAvatar = async () => {
         console.log("INSIDE FETCH REQ")
-        const request = await fetch('http://localhost:8000/')
+        const request = await fetch('http://localhost:8000/image')
         const message = await request.json()
-        console.log('request', message)
+        console.log('request', message.data)
         return message
        }
+
+       
 
   return (
     <LandingContainer>

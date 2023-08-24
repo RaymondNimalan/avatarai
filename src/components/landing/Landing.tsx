@@ -8,22 +8,31 @@ const Landing = () => {
 
   useEffect(() => {
     console.log('useEffect');
-    getAvatar()
   }, []);
 
     const getAvatar = async () => {
         console.log("INSIDE FETCH REQ")
-        const request = await fetch('http://localhost:8000/image')
+        const request = await fetch('http://localhost:8000/image', 
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            prompt: "a white siamese cat",
+            size: "256x256",
+          }),
+        })
         const message = await request.json()
-        console.log('request', message.data)
+        console.log('request', message)
         return message
        }
 
-       
+
 
   return (
     <LandingContainer>
-        <div>Landing</div>
+        <div onClick={getAvatar}>Landing</div>
     </LandingContainer>
   )
 }
